@@ -59,6 +59,43 @@ public class BubbleSort {
         for (int element : arrayToPrint) {
             System.out.println(element);
         }
+        System.out.println();
+    }
+
+    /**
+     * Sort the array in-place with bubble sort.
+     * 
+     * @param arrayToSort The array to sort.
+     */
+    public static void bubbleSort(int[] arrayToSort) {
+        for (int i = (arrayToSort.length - 1); i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                // If the element in the array with the larger index is smaller than the element in the array with the larger index, swap the elements.
+                if (arrayToSort[i] < arrayToSort[j]) {
+                    int temp = arrayToSort[i];
+                    arrayToSort[i] = arrayToSort[j];
+                    arrayToSort[j] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * Check if the array is sorted
+     * 
+     * @param arrayToCheck The array to check.
+     * @return Return true if the array is sorted in ascending order. Return false otherwise.
+     */
+    public static boolean isArraySorted(int[] arrayToCheck) {
+        // Return false if an element with a lower index is greater than an element with a higher index.
+        for (int i = 1; i < (arrayToCheck.length); i++){
+            if (arrayToCheck[i - 1] > arrayToCheck[i]) {
+                return false;
+            }
+        }
+
+        // The array is sorted in ascending order. Return true.
+        return true;
     }
 
     /**
@@ -85,9 +122,18 @@ public class BubbleSort {
         }
 
         // Create an array with random integers between 0 and 100.
-        int[] randomInts = createRandomArray(randomIntsLength);
+        int[] ints = createRandomArray(randomIntsLength);
 
         // Print array to test user input and creation of array with random integers.
-        printArray(randomInts);
+        printArray(ints);
+
+        // Sort the array with bubble sort.
+        bubbleSort(ints);
+
+        // Print array to verify that the array was sorted.
+        printArray(ints);
+
+        // Print a boolean value to indicate whether the array is sorted.
+        System.out.println("Array is sorted: " + isArraySorted(ints));
     }
 }
