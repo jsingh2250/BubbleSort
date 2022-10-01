@@ -206,32 +206,55 @@ public class BubbleSort {
         int[] randomInts = createRandomArray(randomIntsLength);
         // Print the array to test the user-input and to test the creation of the array with random integers.
         System.out.println();
-        System.out.print("Created the random array:");
+        System.out.print("Created the array of random ints.\n" +
+                "These are the elements in the array:");
         printArray(randomInts);
         // Check whether the array is sorted and print a message to indicate whether the array is sorted.
         printIsArraySorted(randomInts);
+        // If the array is already sorted, tell the user that it was created in a sorted order accidentally.
+        if (isArraySorted(randomInts)) {
+            System.out.println(
+                "The above array was accidentally created in a sorted order when it was created randomly.");
+        }
 
         // Write the array to a file. Each line in the file should contain one integer from the array.
-        writeArrayToFile(randomInts, "randomInts.txt");
+        String fileNameForRandomInts = "randomInts.txt";
+        writeArrayToFile(randomInts, fileNameForRandomInts);
         System.out.println();
-        System.out.println("Wrote the random array to a file.");
+        System.out.println("Wrote the array of random ints to the file:\n" +
+                fileNameForRandomInts);
 
         // Read a file that has one integer per line. Put the integers in an array.
-        int[] intsToSort = readFileToArray("randomInts.txt");
+        int[] intsToSort = readFileToArray(fileNameForRandomInts);
         // Print the array to test whether the numbers from the file were correctly read into the array.
         System.out.println();
-        System.out.print("Read the integers from the file into an array:");
+        System.out.print("Read the integers from the file, \"" + fileNameForRandomInts
+                + "\", into an int array.\n" +
+                "These are the elements in the array:");
         printArray(intsToSort);
         // Check whether the array is sorted and print a message to indicate whether the array is sorted.
         printIsArraySorted(intsToSort);
+        // If the array is already sorted, tell the user that it was created in a sorted order accidentally.
+        if (isArraySorted(intsToSort)) {
+            System.out.println(
+                "The above array was accidentally created in a sorted order when it was created randomly.");
+        }
 
         // Sort the array in-place with bubble sort.
         bubbleSort(intsToSort);
         // Print the array to verify that it was sorted.
         System.out.println();
-        System.out.print("Sorted the array with bubble sort:");
+        System.out.print("Sorted the array of ints with bubble sort.\n" +
+                "These are the elements in the array:");
         printArray(intsToSort);
         // Check whether the array is sorted and print a message to indicate whether the array is sorted.
         printIsArraySorted(intsToSort);
+
+        // Write the array to a file. Each line in the file should contain one integer from the array.
+        String fileNameForSortedInts = "sortedInts.txt";
+        writeArrayToFile(intsToSort, fileNameForSortedInts);
+        System.out.println();
+        System.out.println("Wrote the array of sorted ints to the file:\n" +
+                fileNameForSortedInts);
     }
 }
