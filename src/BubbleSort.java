@@ -10,18 +10,32 @@ import java.util.Scanner;
  */
 public class BubbleSort {
     /**
-     * Print a message to the user to ask them to specify the length of the array of random integers and returns the user-inputted value.
+     * Print a message to the user to ask them to specify the length of the array.
      * 
      * @param scanner The scanner object to use to get user-input.
      * @return The user-specified array length.
      */
     public static int getArrayLengthFromUser(Scanner scanner) {
-        // Print a message to the user to ask them to specify the length of the array of random integers.
-        System.out.println();
-        System.out.print("Please enter a positive integer to specify the length of the array of random integers: ");
+        // Declare a variable that will store the user-specified length of the array.
+        // Initialize the variable to zero to indicate that the user hasn't specified a valid array length yet.
+        int randomIntsLength = 0;
 
-        // Store the user-specified array length.
-        int randomIntsLength = scanner.nextInt();
+        // Get the length of the array from the user until they specify a positive integer for the array length.
+        while (randomIntsLength <= 0) {
+            try {
+                // Print a message to the user to ask them to specify the length of the array of random integers.
+                System.out.println();
+                System.out.print(
+                        "Please enter a positive integer to specify the length of the array of random integers: ");
+
+                // Store the user-specified array length.
+                randomIntsLength = Integer.parseInt(scanner.nextLine());
+            } catch (Exception exception) {
+                // Print a message to the user the let them know that their input was invalid.
+                System.out.println();
+                System.out.println("Your input was invalid. Please try again.");
+            }
+        }
 
         // Return the user-specified array length.
         return randomIntsLength;
@@ -182,54 +196,42 @@ public class BubbleSort {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        // Declare a variable that will store the user-specified length of the array of random integers.
-        // Initialize the variable to zero to indicate that the user hasn't specified a valid array length yet.
-        int randomIntsLength = 0;
-
-        // Use the Scanner to let the user specify the length of the array with random integers.
-        try (Scanner userInputScanner = new Scanner(System.in)) {
-            // Get the length of the array from the user until they specify a positive number for the array length.
-            while (randomIntsLength <= 0) {
-                randomIntsLength = getArrayLengthFromUser(userInputScanner);
-            }
-        } catch (Exception exception) {
-            // Print information about the exception and exit out of the program.
-            printExceptionInformationAndExit(exception);
-        }
+        // Use the Scanner to let the user specify the length of the array.
+        Scanner userInputScanner = new Scanner(System.in);
+        int randomIntsLength = getArrayLengthFromUser(userInputScanner);
+        // Close the scanner.
+        userInputScanner.close();
 
         // Create an array with random integers between 0 and 100.
         int[] randomInts = createRandomArray(randomIntsLength);
-
-        // Print array to test user input and creation of array with random integers.
+        // Print the array to test the user-input and to test the creation of the array with random integers.
         System.out.println();
-        System.out.print("Created random array:");
+        System.out.print("Created the random array:");
         printArray(randomInts);
-        // Check whether an array is sorted and print a message to indicate whether the array is sorted.
+        // Check whether the array is sorted and print a message to indicate whether the array is sorted.
         printIsArraySorted(randomInts);
 
-        // Write the array to a file with each line in the file containing one integer from the array.
+        // Write the array to a file. Each line in the file should contain one integer from the array.
         writeArrayToFile(randomInts, "randomInts.txt");
         System.out.println();
         System.out.println("Wrote the random array to a file.");
 
         // Read a file that has one integer per line. Put the integers in an array.
         int[] intsToSort = readFileToArray("randomInts.txt");
-
-        // Print array to test whether the numbers from the file were correctly read into an array.
+        // Print the array to test whether the numbers from the file were correctly read into the array.
         System.out.println();
-        System.out.print("Read integers from file into an array:");
+        System.out.print("Read the integers from the file into an array:");
         printArray(intsToSort);
-        // Check whether an array is sorted and print a message to indicate whether the array is sorted.
+        // Check whether the array is sorted and print a message to indicate whether the array is sorted.
         printIsArraySorted(intsToSort);
 
-        // Sort the array with bubble sort.
+        // Sort the array in-place with bubble sort.
         bubbleSort(intsToSort);
-
-        // Print array to verify that the array was sorted.
+        // Print the array to verify that it was sorted.
         System.out.println();
         System.out.print("Sorted the array with bubble sort:");
         printArray(intsToSort);
-        // Check whether an array is sorted and print a message to indicate whether the array is sorted.
+        // Check whether the array is sorted and print a message to indicate whether the array is sorted.
         printIsArraySorted(intsToSort);
     }
 }
