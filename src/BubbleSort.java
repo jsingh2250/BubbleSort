@@ -139,10 +139,10 @@ public class BubbleSort {
         for (int i = (arrayToSort.length - 1); i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 // If the element in the array with the larger index is smaller than the element in the array with the larger index, swap the elements.
-                if (arrayToSort[i] < arrayToSort[j]) {
-                    int temp = arrayToSort[i];
-                    arrayToSort[i] = arrayToSort[j];
-                    arrayToSort[j] = temp;
+                if (arrayToSort[j] > arrayToSort[j + 1]) {
+                    int temp = arrayToSort[j];
+                    arrayToSort[j] = arrayToSort[j + 1];
+                    arrayToSort[j + 1] = temp;
                 }
             }
         }
